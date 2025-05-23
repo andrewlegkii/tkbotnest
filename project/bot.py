@@ -17,8 +17,8 @@ if not os.path.exists(EXCEL_FILE):
     wb.save(EXCEL_FILE)
 
 user_states = {}
-admin_id = 360300829  # <- Вставь сюда свой настоящий Telegram ID
-DATA_PASSWORD = "2695"  # <- Задай свой пароль для команды /data
+admin_id = 360300829
+DATA_PASSWORD = "2695"
 
 tc_list = ["ГТЕ", "МОНОПОЛИЯ", "ОБОЗ", "Л7", "ТТ", "СИЯНИЕ", "ВОЛК", "ОЛИМП"]
 
@@ -36,7 +36,6 @@ def start(message):
 
 @bot.message_handler(commands=['data'])
 def send_data_file(message):
-    # Проверяем пароль
     args = message.text.split(maxsplit=1)
     if len(args) < 2:
         bot.reply_to(message, "❗ Пожалуйста, укажи пароль после команды, например:\n/data пароль123")
@@ -88,7 +87,6 @@ def help_start(message):
 def handle_text(message):
     state = user_states.get(message.chat.id, {})
 
-    # Режим помощи — пересылаем админу
     if state.get('help_mode'):
         if message.text == "🔙 Назад":
             user_states[message.chat.id] = {}
